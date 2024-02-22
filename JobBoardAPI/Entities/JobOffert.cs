@@ -23,9 +23,9 @@ namespace JobBoardAPI.Entities
         public JobTime JobTime { get; set; }
         [Required]
         public JobType JobType { get; set; }
-        [Required]
-        public Requirement Requirement { get; set; }
 
+        [Required]
+        public virtual Requirement Requirement { get; set; }    
         public virtual List<Seeker> Seekers { get; set; } = new List<Seeker>(); 
 
     }
