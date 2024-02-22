@@ -1,4 +1,5 @@
 
+using JobBoardAPI.Middlwares;
 using JobBoardAPI.Services;
 using JobBoardAPI.ServicesInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace JobBoardAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IJobOffertService, JobOffertService>();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.AddScoped<ErrorHandlingMiddleware>();
             builder.Services.AddDbContext<JobOffertsDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -37,8 +39,10 @@ namespace JobBoardAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
+            app.UseHttpsRedirection();
+           
             app.UseAuthorization();
 
 

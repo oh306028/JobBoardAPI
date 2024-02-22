@@ -6,5 +6,6 @@ namespace JobBoardAPI.ServicesInterfaces
     public interface IJobOffertService
     {
         List<JobOfferDto> GetAllOferts();
+        JobOfferDto GetOfferById(int id);
     }
 }

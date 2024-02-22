@@ -27,6 +27,14 @@ namespace JobBoardAPI.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<JobOfferDto> GetOfferById([FromRoute] int id)
+        {
+
+            var result = _jobOffertService.GetOfferById(id);
+
+            return Ok(result);
+        }
 
 
 

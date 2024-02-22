@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JobBoardAPI.Entities;
+using JobBoardAPI.Exceptions;
 using JobBoardAPI.Models;
 using JobBoardAPI.ServicesInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +19,6 @@ namespace JobBoardAPI.Services
         }
 
 
-        public IMapper Mapper { get; }
-
         public List<JobOfferDto> GetAllOferts()
         {
             var offerts = _dbContext.JobOfferts
@@ -30,6 +29,21 @@ namespace JobBoardAPI.Services
 
 
             return results;
+        }
+
+
+        public JobOfferDto GetOfferById(int id)
+        {
+            var offer = _dbContext.JobOfferts.Include(r => r.Requirement).FirstOrDefault(o => o.Id == id);
+
+            
+            if (offer is null)
+                throw new NotFoundException("Offer not found");
+            
+
+            var result = _mapper.Map<JobOfferDto>(offer);
+
+            return result;
         }
     }
 }
