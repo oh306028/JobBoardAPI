@@ -25,11 +25,20 @@ namespace JobBoardAPI
                 .UsingEntity(j => j.ToTable("OffertsSeekers"));
 
             modelBuilder.Entity<JobOffert>()
-                .HasOne(r => r.Requirement)
-                .WithOne(o => o.JobOffert);
+                .HasOne(r => r.Requirement);
+
+
+
+            modelBuilder.Entity<JobOffert>()
+                .HasData(new JobOffert() {Id = 1, Title = "Software developer", Description = "Job offer for C# developer with minimum 3 years experience and graduated"
+                , CompanyName = "TrustFormulaIt", Salary = 2500, Location = "Warsaw", JobTime = Forms.JobTime.PartTime, JobType = Forms.JobType.Contract,});
+
+            modelBuilder.Entity<Requirement>()
+                .HasData(new Requirement() { Id = 1, JobOffertId = 1 , Age = 20, Experience = 3, Education = Forms.Education.Graduated });
+
+
 
         }
-
 
   
     }

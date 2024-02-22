@@ -12,7 +12,6 @@ namespace JobBoardAPI.Entities
         [Required]
         public int Experience { get; set; }
 
-        public virtual JobOffert JobOffert { get; set; }
         public int JobOffertId { get; set; }
 
     }

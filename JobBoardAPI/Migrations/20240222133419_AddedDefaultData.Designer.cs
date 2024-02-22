@@ -3,6 +3,7 @@ using JobBoardAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoardAPI.Migrations
 {
     [DbContext(typeof(JobOffertsDbContext))]
-    partial class JobOffertsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240222133419_AddedDefaultData")]
+    partial class AddedDefaultData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,11 +163,13 @@ namespace JobBoardAPI.Migrations
 
             modelBuilder.Entity("JobBoardAPI.Entities.Requirement", b =>
                 {
-                    b.HasOne("JobBoardAPI.Entities.JobOffert", null)
+                    b.HasOne("JobBoardAPI.Entities.JobOffert", "JobOffert")
                         .WithOne("Requirement")
                         .HasForeignKey("JobBoardAPI.Entities.Requirement", "JobOffertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("JobOffert");
                 });
 
             modelBuilder.Entity("JobOffertSeeker", b =>

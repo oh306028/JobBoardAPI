@@ -1,5 +1,8 @@
 
+using JobBoardAPI.Services;
+using JobBoardAPI.ServicesInterfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace JobBoardAPI
 {
@@ -15,11 +18,14 @@ namespace JobBoardAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<IJobOffertService, JobOffertService>();
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.AddDbContext<JobOffertsDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
            
+
            
 
             var app = builder.Build();
