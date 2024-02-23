@@ -16,6 +16,8 @@ namespace JobBoardAPI
         public DbSet<Seeker> Seekers { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +29,16 @@ namespace JobBoardAPI
             modelBuilder.Entity<JobOffert>()
                 .HasOne(r => r.Requirement);
 
+            modelBuilder.Entity<User>()
+                .HasOne(r => r.Role);
+
+
+            modelBuilder.Entity<Role>()
+                .HasData(
+                new Role() { Id = 1, Name = "User" },
+                new Role() { Id = 2, Name = "Manager" },
+                new Role() { Id = 3, Name = "Admin" }
+                );
 
 
             modelBuilder.Entity<JobOffert>()

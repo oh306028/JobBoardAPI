@@ -1,5 +1,6 @@
 ﻿using JobBoardAPI.Models;
 using JobBoardAPI.ServicesInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -38,6 +39,7 @@ namespace JobBoardAPI.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Menager")]
         public ActionResult<int> CreateOffer([FromBody] CreateOfferDto dto)
         {
              var result = _jobOffertService.CreateOffer(dto);
@@ -48,6 +50,7 @@ namespace JobBoardAPI.Controllers
 
 
         [HttpDelete("{offerId}")]
+        [Authorize(Roles = "Menager")]
         public ActionResult DeleteOffer([FromRoute] int offerId)
         {
             _jobOffertService.DeleteOffer(offerId);

@@ -17,10 +17,20 @@ namespace JobBoardAPI.Middlwares
                 context.Response.StatusCode = 404;
                await context.Response.WriteAsync(notFound.Message);
 
-            }catch(Exception exception)
+            }catch(BadRequestException badRequest)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync(badRequest.Message);
+            }
+            catch (RegistrationException regEx)
+            {
+                context.Response.StatusCode = 409;
+                await context.Response.WriteAsync(regEx.Message);
+            }
+            catch (Exception exception)
             {
                 context.Response.StatusCode = 500;
-              await  context.Response.WriteAsync(exception.Message);
+                await context.Response.WriteAsync(exception.Message);
             }
 
 

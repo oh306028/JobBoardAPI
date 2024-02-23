@@ -3,6 +3,7 @@ using JobBoardAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoardAPI.Migrations
 {
     [DbContext(typeof(JobOffertsDbContext))]
-    partial class JobOffertsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223135307_RefactoredUser")]
+    partial class RefactoredUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,6 +232,10 @@ namespace JobBoardAPI.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");

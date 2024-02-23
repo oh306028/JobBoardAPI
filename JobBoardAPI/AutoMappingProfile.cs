@@ -42,6 +42,9 @@ namespace JobBoardAPI
                 .ForMember(c => c.Education,
                 obj => obj.MapFrom(src => Enum.Parse<Forms.Education>(src.Education)));
 
+            CreateMap<User, UserDto>()
+                .ForMember(c => c.Role, obj => obj.MapFrom(src => src.RoleId));
+
 
 
         }
