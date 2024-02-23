@@ -46,6 +46,14 @@ namespace JobBoardAPI.Controllers
 
         }
 
+        [HttpDelete("{offerId}")]
+        public ActionResult DeleteOffer([FromRoute] int offerId)
+        {
+            _jobOffertService.DeleteOffer(offerId);
+
+            return NoContent();
+
+        }
 
 
      

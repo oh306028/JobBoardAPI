@@ -57,5 +57,21 @@ namespace JobBoardAPI.Services
 
             return offerToAdd.Id;
         }
+
+
+        public void DeleteOffer(int offerId)
+        {
+            var jobOffer = _dbContext.JobOfferts.FirstOrDefault(x => x.Id == offerId);
+
+            if (jobOffer is null)
+                throw new NotFoundException("Offer not found");
+
+
+            _dbContext.Remove(jobOffer);
+            _dbContext.SaveChanges();
+
+
+        }
     }
+
 }
