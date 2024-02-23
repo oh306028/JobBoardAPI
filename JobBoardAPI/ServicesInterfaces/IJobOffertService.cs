@@ -7,5 +7,6 @@ namespace JobBoardAPI.ServicesInterfaces
     {
         List<JobOfferDto> GetAllOferts();
         JobOfferDto GetOfferById(int id);
+        int CreateOffer(CreateOfferDto dto);
     }
 }

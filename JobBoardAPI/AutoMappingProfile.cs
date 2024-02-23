@@ -17,6 +17,24 @@ namespace JobBoardAPI
 
             CreateMap<Seeker, SeekerDto>()
                 .ForMember(e => e.Education, s => s.MapFrom(t => t.Education.ToString()));
+
+          
+
+            CreateMap<CreateOfferDto, JobOffert>()
+               .ForMember(dest => dest.Requirement,
+                          opt => opt.MapFrom(src => new Requirement
+                          {
+                              Education = Enum.Parse<Forms.Education>(src.Education),
+                              Experience = src.Experience,
+                              Age = src.Age
+                          }))
+               .ForMember(dest => dest.JobTime,
+                          opt => opt.MapFrom(src => Enum.Parse<Forms.JobTime>(src.JobTime)))
+               .ForMember(dest => dest.JobType,
+                          opt => opt.MapFrom(src => Enum.Parse<Forms.JobType>(src.JobType)));
+
+
+
         }
     }
 }

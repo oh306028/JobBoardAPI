@@ -45,5 +45,17 @@ namespace JobBoardAPI.Services
 
             return result;
         }
+
+
+        public int CreateOffer(CreateOfferDto dto)
+        {
+            var offerToAdd = _mapper.Map<JobOffert>(dto);
+
+            _dbContext.Add(offerToAdd);
+            _dbContext.SaveChanges();
+
+
+            return offerToAdd.Id;
+        }
     }
 }

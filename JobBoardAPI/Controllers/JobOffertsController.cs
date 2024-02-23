@@ -37,6 +37,15 @@ namespace JobBoardAPI.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult<int> CreateOffer([FromBody] CreateOfferDto dto)
+        {
+             var result = _jobOffertService.CreateOffer(dto);
+
+            return Created($"api/offers/{result}", null);
+
+        }
+
 
 
      
