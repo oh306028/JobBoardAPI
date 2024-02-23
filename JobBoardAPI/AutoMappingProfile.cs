@@ -34,6 +34,8 @@ namespace JobBoardAPI
                           opt => opt.MapFrom(src => Enum.Parse<Forms.JobType>(src.JobType)));
 
 
+            CreateMap<Requirement, RequirementDto>()
+                .ForMember(e => e.Education, obj => obj.MapFrom(src => src.Education.ToString()));
 
         }
     }

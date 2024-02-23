@@ -21,6 +21,7 @@ namespace JobBoardAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IJobOffertService, JobOffertService>();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.AddScoped<IRequirementService, RequirementService>();
             builder.Services.AddScoped<ErrorHandlingMiddleware>();
             builder.Services.AddDbContext<JobOffertsDbContext>(options =>
             {
