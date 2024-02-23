@@ -46,6 +46,7 @@ namespace JobBoardAPI.Controllers
 
         }
 
+
         [HttpDelete("{offerId}")]
         public ActionResult DeleteOffer([FromRoute] int offerId)
         {
@@ -55,7 +56,7 @@ namespace JobBoardAPI.Controllers
 
         }
 
-
-     
+    
+        
     }
 }
