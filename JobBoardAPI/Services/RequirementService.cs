@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobBoardAPI.Entities;
 using JobBoardAPI.Exceptions;
 using JobBoardAPI.Models;
 using JobBoardAPI.ServicesInterfaces;
@@ -33,5 +34,18 @@ namespace JobBoardAPI.Services
             return result;
 
         }
+
+        public void CreateRequirement(int offerId, CreateRequirementDto dto)
+        {
+            var newDto = _mapper.Map<Requirement>(dto);
+            newDto.JobOffertId = offerId;
+
+
+            _dbContext.Add(newDto);
+            _dbContext.SaveChanges();
+
+        }
+
+
     }
 }

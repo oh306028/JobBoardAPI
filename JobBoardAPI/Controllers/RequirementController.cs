@@ -25,6 +25,15 @@ namespace JobBoardAPI.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost]
+        public ActionResult CreateRequirements(int offerId, CreateRequirementDto dto)
+        {
+            _requirementService.CreateRequirement(offerId, dto);
+
+            return NoContent();
+
+        }
        
     }
 }
