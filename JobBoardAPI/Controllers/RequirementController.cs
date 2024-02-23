@@ -27,13 +27,21 @@ namespace JobBoardAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRequirements(int offerId, CreateRequirementDto dto)
+        public ActionResult CreateRequirements([FromRoute] int offerId, [FromBody] CreateRequirementDto dto)
         {
             _requirementService.CreateRequirement(offerId, dto);
 
             return NoContent();
 
         }
+
+        [HttpPatch]
+        public ActionResult UpdateRequirements([FromRoute] int offerId, [FromBody] UpdateRequirementDto dto)
+        {
+            _requirementService.UpdateRequirements(offerId, dto);
+
+            return Ok();
+        }   
        
     }
 }

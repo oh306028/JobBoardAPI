@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobBoardAPI.Entities;
 using JobBoardAPI.Exceptions;
+using JobBoardAPI.Forms;
 using JobBoardAPI.Models;
 using JobBoardAPI.ServicesInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,31 @@ namespace JobBoardAPI.Services
 
         }
 
+        public void UpdateRequirements(int offerId, UpdateRequirementDto dto)   
+        {
+            var jobOfferToUpdate = _dbContext.JobOfferts.Include(r => r.Requirement).FirstOrDefault(i => i.Id == offerId);
 
+            if (jobOfferToUpdate is null)
+                throw new NotFoundException("Offer not found");
+
+
+            if (dto.Education != null)            
+                jobOfferToUpdate.Requirement.Education = (Education)Enum.Parse(typeof(Education), dto.Education);
+            
+
+            if (dto.Age > 0)            
+                jobOfferToUpdate.Requirement.Age = dto.Age;
+            
+
+            if (dto.Experience > 0)            
+                jobOfferToUpdate.Requirement.Experience = dto.Experience;
+            
+
+
+
+            _dbContext.SaveChanges();
+
+
+        }
     }
 }

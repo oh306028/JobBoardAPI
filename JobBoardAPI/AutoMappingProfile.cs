@@ -42,6 +42,8 @@ namespace JobBoardAPI
                 .ForMember(c => c.Education,
                 obj => obj.MapFrom(src => Enum.Parse<Forms.Education>(src.Education)));
 
+
+
         }
     }
 }

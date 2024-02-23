@@ -6,5 +6,6 @@ namespace JobBoardAPI.ServicesInterfaces
     {
         RequirementDto GetRequirements(int offerId);
         void CreateRequirement(int offerId, CreateRequirementDto dto);
+        void UpdateRequirements(int offerId, UpdateRequirementDto dto);
     }
 }
