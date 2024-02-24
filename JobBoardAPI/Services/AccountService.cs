@@ -91,7 +91,8 @@ namespace JobBoardAPI.Services
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, userLogging.Id.ToString()),
-                new Claim(ClaimTypes.Role, userLogging.Role.Name)
+                new Claim(ClaimTypes.Role, userLogging.Role.Name),
+                new Claim(ClaimTypes.Email, userLogging.Email)
             };
 
 

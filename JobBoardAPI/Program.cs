@@ -45,6 +45,7 @@ namespace JobBoardAPI
             });
 
 
+            builder.Services.AddScoped<ISeekerService, SeekerService>();
             builder.Services.AddScoped<IUserContextService, UserContextService>();
             builder.Services.AddScoped<IAuthorizationHandler, OperationRequirementHandler>();
             builder.Services.AddSingleton(authenticationSettings);

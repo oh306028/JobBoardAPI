@@ -12,6 +12,9 @@ namespace JobBoardAPI.Entities
         [Required]
         public int Age { get; set; }
 
+        public int? CreatedByUserId { get; set; }
+        public virtual User CreatedBy { get; set; }     
+
         public Education Education { get; set; }
         [Required]
         public int Experience { get; set; }

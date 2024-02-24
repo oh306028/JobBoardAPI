@@ -4,6 +4,7 @@ using JobBoardAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoardAPI.Migrations
 {
     [DbContext(typeof(JobOffertsDbContext))]
-    partial class JobOffertsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240224213819_CreatedByUserSeekerAdded")]
+    partial class CreatedByUserSeekerAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,7 +205,7 @@ namespace JobBoardAPI.Migrations
                     b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedByUserId")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("int");
 
                     b.Property<int>("Education")
