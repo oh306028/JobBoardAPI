@@ -11,6 +11,9 @@ namespace JobBoardAPI.Entities
         [MaxLength(30)]
         public string Title { get; set; }
 
+        public int? CreatedById { get; set; }
+        public virtual User CreatedBy { get; set; }         
+
         public string Description { get; set; }
         [MaxLength(30)]
         public string Location { get; set; }

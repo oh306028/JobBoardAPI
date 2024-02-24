@@ -12,7 +12,14 @@ namespace JobBoardAPI.Middlwares
             {
                await  next.Invoke(context);
 
-            }catch(NotFoundException notFound)
+            }
+            catch (ForbidedException forbid)
+            {
+                context.Response.StatusCode = 403;
+                await context.Response.WriteAsync(forbid.Message);
+
+            }
+            catch (NotFoundException notFound)
             {
                 context.Response.StatusCode = 404;
                await context.Response.WriteAsync(notFound.Message);

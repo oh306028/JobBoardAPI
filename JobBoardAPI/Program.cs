@@ -1,8 +1,10 @@
 
+using JobBoardAPI.Authorization;
 using JobBoardAPI.Entities;
 using JobBoardAPI.Middlwares;
 using JobBoardAPI.Services;
 using JobBoardAPI.ServicesInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -43,7 +45,8 @@ namespace JobBoardAPI
             });
 
 
-
+            builder.Services.AddScoped<IUserContextService, UserContextService>();
+            builder.Services.AddScoped<IAuthorizationHandler, OperationRequirementHandler>();
             builder.Services.AddSingleton(authenticationSettings);
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -53,6 +56,7 @@ namespace JobBoardAPI
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
             builder.Services.AddScoped<ErrorHandlingMiddleware>();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<JobOffertsDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

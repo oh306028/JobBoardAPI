@@ -1,5 +1,6 @@
 ﻿using JobBoardAPI.Models;
 using JobBoardAPI.ServicesInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,7 @@ namespace JobBoardAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public ActionResult CreateRequirements([FromRoute] int offerId, [FromBody] CreateRequirementDto dto)
         {
             _requirementService.CreateRequirement(offerId, dto);
@@ -35,7 +37,9 @@ namespace JobBoardAPI.Controllers
 
         }
 
+
         [HttpPatch]
+        [Authorize(Roles = "Manager")]
         public ActionResult UpdateRequirements([FromRoute] int offerId, [FromBody] UpdateRequirementDto dto)
         {
             _requirementService.UpdateRequirements(offerId, dto);
