@@ -40,6 +40,8 @@ namespace JobBoardAPI.Services
                     .Take(query.PageSize)
                     .ToList();
 
+            
+
 
             var totalCount = startingQuery.Count();
 

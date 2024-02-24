@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace JobBoardAPI
 {
@@ -44,6 +45,9 @@ namespace JobBoardAPI
                 };
             });
 
+
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddScoped<ISeekerService, SeekerService>();
             builder.Services.AddScoped<IUserContextService, UserContextService>();
