@@ -10,5 +10,6 @@ namespace JobBoardAPI.ServicesInterfaces
         JobOfferDto GetOfferById(int id);
         int CreateOffer(CreateOfferDto dto);
         void DeleteOffer(int offerId);
+        void ApplyForOffer(int offerId);
     }
 }

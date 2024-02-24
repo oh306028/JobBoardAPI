@@ -70,5 +70,17 @@ namespace JobBoardAPI.Services
 
 
         }
+
+
+        public Seeker GetCurrentSeekerInfo()
+        {
+            var seeker = _dbContext.Seekers.FirstOrDefault(i => i.CreatedByUserId == _contextService.GetUserId);
+
+            if (seeker is null)
+                throw new NotFoundException("Seeker not found");
+
+            return seeker;
+
+        }
     }
 }

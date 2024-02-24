@@ -62,6 +62,15 @@ namespace JobBoardAPI.Controllers
 
         }
 
+
+        [HttpPost("{offerId}/apply")] 
+        public ActionResult ApplyForOffer([FromRoute] int offerId)
+        {
+            _jobOffertService.ApplyForOffer(offerId); 
+
+            return Ok();
+        }
+
     
         
     }

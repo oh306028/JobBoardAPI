@@ -1,4 +1,5 @@
-﻿using JobBoardAPI.Models;
+﻿using JobBoardAPI.Entities;
+using JobBoardAPI.Models;
 
 namespace JobBoardAPI.ServicesInterfaces
 {
@@ -7,5 +8,6 @@ namespace JobBoardAPI.ServicesInterfaces
         IEnumerable<SeekerDto> GetAllSeekers();
         IEnumerable<JobOfferDto> GetSeekerAppliedOffers();
         void RegisterSeeker(RegisterSeekerDto dto);
+        Seeker GetCurrentSeekerInfo();
     }
 }

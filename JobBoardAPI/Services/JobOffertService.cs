@@ -16,13 +16,15 @@ namespace JobBoardAPI.Services
         private readonly IMapper _mapper;
         private readonly IAuthorizationService _authorizationService;
         private readonly IUserContextService _contextService;
+        private readonly ISeekerService _seekerService;
 
-        public JobOffertService(JobOffertsDbContext dbContext, IMapper mapper, IAuthorizationService authorizationService, IUserContextService contextService)
+        public JobOffertService(JobOffertsDbContext dbContext, IMapper mapper, IAuthorizationService authorizationService, IUserContextService contextService, ISeekerService seekerService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _authorizationService = authorizationService;
             _contextService = contextService;
+            _seekerService = seekerService;
         }
 
 
@@ -49,6 +51,8 @@ namespace JobBoardAPI.Services
 
             return results;
         }
+
+
 
 
         public JobOfferDto GetOfferById(int id)
@@ -100,8 +104,27 @@ namespace JobBoardAPI.Services
             _dbContext.Remove(jobOffer);
             _dbContext.SaveChanges();
 
+        }
+
+
+        public void ApplyForOffer(int offerId)  
+        {
+            var seeker = _seekerService.GetCurrentSeekerInfo();
+
+            var jobOffer = _dbContext.JobOfferts.Include(r => r.Seekers).FirstOrDefault(i => i.Id == offerId);
+
+
+            if (jobOffer is null)
+                throw new NotFoundException("Offer not found");
+
+            jobOffer.Seekers.Add(seeker);
+            _dbContext.SaveChanges();
+
+
 
         }
+
+
     }
 
 }
