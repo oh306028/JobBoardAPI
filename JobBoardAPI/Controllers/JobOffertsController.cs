@@ -21,9 +21,9 @@ namespace JobBoardAPI.Controllers
 
 
         [HttpGet]
-        public ActionResult<List<JobOfferDto>> Get([FromQuery] string searchPhrase) 
+        public ActionResult<PagedResult<JobOfferDto>> Get([FromQuery] QueryModel query) 
         {
-            var result = _jobOffertService.GetAllOferts(searchPhrase);
+            var result = _jobOffertService.GetAllOferts(query);
 
             return Ok(result);
 

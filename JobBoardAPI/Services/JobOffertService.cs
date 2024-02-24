@@ -26,16 +26,26 @@ namespace JobBoardAPI.Services
         }
 
 
-        public List<JobOfferDto> GetAllOferts(string searchPhrase)
+        public PagedResult<JobOfferDto> GetAllOferts(QueryModel query)
         {
-            var offerts = _dbContext.JobOfferts
+            var startingQuery = _dbContext.JobOfferts
                     .Include(r => r.Requirement)
-                    .Where(r => searchPhrase == null || ( r.Title.ToLower().Contains(searchPhrase.ToLower())
-                    || r.Description.ToLower().Contains(searchPhrase.ToLower())))
+                    .Where(r => query.searchPhrase == null || (r.Title.ToLower().Contains(query.searchPhrase.ToLower())
+                    || r.Description.ToLower().Contains(query.searchPhrase.ToLower())));
+
+
+                   var offerts = startingQuery.Skip(query.PageSize * (query.PageNumber - 1))
+                    .Take(query.PageSize)
                     .ToList();
 
-            var results = _mapper.Map<List<JobOfferDto>>(offerts);
 
+            var totalCount = startingQuery.Count();
+
+
+            var offersDtos = _mapper.Map<List<JobOfferDto>>(offerts);
+
+
+            var results = new PagedResult<JobOfferDto>(offersDtos, query.PageNumber, query.PageSize, totalCount);
 
             return results;
         }

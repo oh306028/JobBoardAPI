@@ -6,7 +6,7 @@ namespace JobBoardAPI.ServicesInterfaces
 {
     public interface IJobOffertService
     {
-        List<JobOfferDto> GetAllOferts(string searchPhrase);
+        PagedResult<JobOfferDto> GetAllOferts(QueryModel query);
         JobOfferDto GetOfferById(int id);
         int CreateOffer(CreateOfferDto dto);
         void DeleteOffer(int offerId);
