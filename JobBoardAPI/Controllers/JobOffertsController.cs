@@ -19,6 +19,15 @@ namespace JobBoardAPI.Controllers
             _jobOffertService = jobOffertService;
         }
 
+        [HttpGet("published")]
+
+        public ActionResult<IEnumerable<JobOfferDto>> GetMenagersOffers()
+        {
+            var result = _jobOffertService.GetMenagersOffers();
+
+            return Ok(result);
+        }
+
 
         [HttpGet]
         public ActionResult<PagedResult<JobOfferDto>> Get([FromQuery] QueryModel query) 

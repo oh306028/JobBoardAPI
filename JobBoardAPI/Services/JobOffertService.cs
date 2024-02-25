@@ -28,10 +28,29 @@ namespace JobBoardAPI.Services
         }
 
 
+
+        public IEnumerable<JobOfferDto> GetMenagersOffers() 
+        {
+            var offers = _dbContext.JobOfferts
+                .Include(x => x.Seekers)
+                .Include(r => r.Requirement)
+                .Where(d => d.CreatedById == _contextService.GetUserId)
+                .ToList();
+
+
+            var offersDtos = _mapper.Map<List<JobOfferDto>>(offers);
+
+
+            return offersDtos;
+
+
+        }
+
+
+
         public PagedResult<JobOfferDto> GetAllOferts(QueryModel query)
         {
-            var startingQuery = _dbContext.JobOfferts
-                    .Include(r => r.Requirement)
+            var startingQuery = _dbContext.JobOfferts                  
                     .Where(r => query.searchPhrase == null || (r.Title.ToLower().Contains(query.searchPhrase.ToLower())
                     || r.Description.ToLower().Contains(query.searchPhrase.ToLower())));
 

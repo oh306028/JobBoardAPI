@@ -46,7 +46,10 @@ namespace JobBoardAPI
                 .ForMember(c => c.Role, obj => obj.MapFrom(src => src.RoleId));
 
             CreateMap<RegisterSeekerDto, Seeker>();
-                
+
+            CreateMap<Seeker, SeekersAtOffersDto>()
+                .ForMember(e => e.Education, s => s.MapFrom(t => t.Education.ToString()));
+
 
 
 

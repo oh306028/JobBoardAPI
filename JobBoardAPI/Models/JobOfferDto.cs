@@ -25,7 +25,7 @@ namespace JobBoardAPI.Models
         public int Experience { get; set; }
 
         public int Age { get; set; }    
-        public List<SeekerDto> Seekers { get; set; }
+       
 
     }
 }

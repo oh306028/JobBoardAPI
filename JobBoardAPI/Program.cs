@@ -46,9 +46,6 @@ namespace JobBoardAPI
             });
 
 
-            builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
             builder.Services.AddScoped<ISeekerService, SeekerService>();
             builder.Services.AddScoped<IUserContextService, UserContextService>();
             builder.Services.AddScoped<IAuthorizationHandler, OperationRequirementHandler>();

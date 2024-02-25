@@ -11,5 +11,6 @@ namespace JobBoardAPI.ServicesInterfaces
         int CreateOffer(CreateOfferDto dto);
         void DeleteOffer(int offerId);
         void ApplyForOffer(int offerId);
+        IEnumerable<JobOfferDto> GetMenagersOffers();
     }
 }
