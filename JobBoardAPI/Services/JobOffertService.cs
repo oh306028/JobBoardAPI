@@ -17,14 +17,16 @@ namespace JobBoardAPI.Services
         private readonly IAuthorizationService _authorizationService;
         private readonly IUserContextService _contextService;
         private readonly ISeekerService _seekerService;
+        private readonly ILogger<JobOffertService> _logger;
 
-        public JobOffertService(JobOffertsDbContext dbContext, IMapper mapper, IAuthorizationService authorizationService, IUserContextService contextService, ISeekerService seekerService)
+        public JobOffertService(JobOffertsDbContext dbContext, IMapper mapper, IAuthorizationService authorizationService, IUserContextService contextService, ISeekerService seekerService, ILogger<JobOffertService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _authorizationService = authorizationService;
             _contextService = contextService;
             _seekerService = seekerService;
+            _logger = logger;
         }
 
 
@@ -110,6 +112,8 @@ namespace JobBoardAPI.Services
         {
             var jobOffer = _dbContext.JobOfferts.FirstOrDefault(x => x.Id == offerId);
 
+            _logger.LogWarning($"Delete action invoked with jobOffer id: {offerId}");
+
             if (jobOffer is null)
                 throw new NotFoundException("Offer not found");
 
@@ -121,6 +125,8 @@ namespace JobBoardAPI.Services
             {
                 throw new ForbidedException("Not authorized");
             }
+
+            _logger.LogWarning($"Delete action succeded with jobOffer id: {offerId}");
 
             _dbContext.Remove(jobOffer);
             _dbContext.SaveChanges();

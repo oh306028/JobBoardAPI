@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NLog.Web;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -45,6 +46,8 @@ namespace JobBoardAPI
                 };
             });
 
+            builder.Logging.ClearProviders();
+            builder.Host.UseNLog();
 
             builder.Services.AddScoped<ISeekerService, SeekerService>();
             builder.Services.AddScoped<IUserContextService, UserContextService>();

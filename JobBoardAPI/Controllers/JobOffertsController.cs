@@ -19,7 +19,9 @@ namespace JobBoardAPI.Controllers
             _jobOffertService = jobOffertService;
         }
 
+
         [HttpGet("published")]
+        [Authorize(Roles = "Manager")]
 
         public ActionResult<IEnumerable<JobOfferDto>> GetMenagersOffers()
         {
@@ -37,6 +39,7 @@ namespace JobBoardAPI.Controllers
             return Ok(result);
 
         }
+
 
         [HttpGet("{id}")]
         public ActionResult<JobOfferDto> GetOfferById([FromRoute] int id)
