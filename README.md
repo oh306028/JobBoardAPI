@@ -9,12 +9,13 @@ The JobOffer API is a RESTful API designed to manage job offers, applications, a
 - **Application Viewing**: Managers can view applicants for their job offers.
 - **Offer Retrieval**: Seekers can retrieve all available job offers.
 - **Applied Offers**: Seekers can retrieve all job offers they have applied for.
+- **Pagination**: The Get offers endpoint allows to paginate the results, choosing page size and page number
 
 ## Endpoints
 
 ### Job Offers
 
-- `GET /api/offers`: Retrieve all available job offers.
+- `GET /api/offers?searchPhrase=offers&pageSize&pageNumber`: Retrieve all available job offers.
 - `POST /api/offers`: Create a new job offer.
 - `PATCH /api/offers/{offerId}`: Update an existing job offer.
 - `DELETE /api/offers/{offerId}`: Delete a job offer.
@@ -31,9 +32,8 @@ The API utilizes token-based authentication. Users (both managers and seekers) m
 - **JWT**: JSON Web Tokens for secure authentication.
 - Entity Framework Core: Object-Relational Mapping (ORM) framework for interacting with SQL Server database.
 - SQL Server: Relational database for storing job offers, applications, and user data.
+- NLog library (logging into files)
 
 
 in progress:
-- endpoint for applications
-- seeker controller
-- loggin into file (Nlog)
+-Integral tests
